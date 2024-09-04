@@ -5,7 +5,7 @@
                 <h1 class="modal-title fs-5" id="md-tmbUserLabel">Tambah User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="post">
+            <form action="../../../model/bridge/master/mnguser.php" method="post">
                 <div class="modal-body ps-3 pr-3">
                     <div class="mb-3">
                         <label for="iptNmlkp">Full Name</label>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="iptLv">Level</label>
-                        <select id="iptLv" class="form-select">
+                        <select id="iptLv" name="iptLv" class="form-select">
                             <option selected>Choose....</option>
                             <option value="1">Satu</option>
                         </select>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
 
