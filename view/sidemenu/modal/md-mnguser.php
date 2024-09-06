@@ -5,7 +5,7 @@
                 <h1 class="modal-title fs-5" id="md-tmbUserLabel">Tambah User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="../../../model/bridge/master/mnguser.php" method="post">
+            <form action="../../../model/bridge/master/mnguser.php?word=tmbUser" method="post">
                 <div class="modal-body ps-3 pr-3">
                     <div class="mb-3">
                         <label for="iptNmlkp">Full Name</label>
@@ -21,11 +21,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="iptEmail">Email</label>
-                        <input type="password" class="form-control" name="iptEmail" id="iptEmail">
+                        <input type="email" class="form-control" name="iptEmail" id="iptEmail">
                     </div>
                     <div class="mb-3">
                         <label for="iptWa">WA</label>
-                        <input type="text" class="form-control" name="iptWa" id="iptWa">
+                        <div class="input-group">
+                            <span class="input-group-text">+62</span>
+                            <input type="number" class="form-control" name="iptWa" id="iptWa">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="iptLv">Level</label>
