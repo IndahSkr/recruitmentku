@@ -1,5 +1,6 @@
 <?php
-include "./connection.php";
+include "conn.php";
+// include_once './connection.php';
 $dtpos = json_decode(file_get_contents('php://input'), true);
 $code = $dtpos['code'];
 
