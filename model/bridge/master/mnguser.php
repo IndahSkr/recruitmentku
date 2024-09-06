@@ -10,7 +10,8 @@
 
 <body>
     <?php
-    // session_start();
+    // echo $_POST['iptNmlkp'];
+    session_start();
     include "../../url/alamat.php";
     include "../../../assets/vendor/func/curl.php";
 
@@ -33,15 +34,51 @@
             "wa" => $wa,
             "idlevel" => $idlevel
         );
+
+        $dtjson = json_encode($dt);
+        $send = curlpost($url, $dtjson);
+        $result = json_decode($send, TRUE);
+        $hasil = $result['status'];
+
+        if ($hasil > 0) {
     ?>
-        <script>
+            <script>
+                Swal.fire({
+                    title: 'Sukses',
+                    text: 'Data Berhasil Disimpan',
+                    icon: 'success',
+                    timer: 1500,
+                    timerProgressBar: true
+                }).then(function() {
+                    window.location.href = '../../../view/menu/master/mnguser.php'
+                })
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Gagal',
+                    text: 'Data Gagal Disimpan',
+                    text: 'Silahkan coba lagi',
+                    icon: 'error',
+                    timer: 1500,
+                    timerProgressBar: true
+                }).then(function() {
+                    window.location = '../../../view/menu/master/mnguser.php'
+                })
+            </script>
+        <?php
+        }
+        ?>
+        <!-- <script>
             Swal.fire({
                 title: 'Error!',
                 text: 'Do you want to continue',
                 icon: 'error',
                 confirmButtonText: 'Cool'
             })
-        </script>
+        </script> -->
     <?php
     }
     ?>
