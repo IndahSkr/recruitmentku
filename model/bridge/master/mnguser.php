@@ -40,7 +40,7 @@
         $result = json_decode($send, TRUE);
         $hasil = $result['status'];
 
-        if ($hasil > 0) {
+        if ($hasil == 200) {
     ?>
             <script>
                 Swal.fire({
