@@ -47,14 +47,14 @@
                   </p>
                   <span class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
                 </div>
-                <form>
+                <form method="POST" action="../../model/bridge/auth/login.php?word=login">
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="iptUname" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="iptUname" name="iptUname" aria-describedby="usernameHelp">
                   </div>
                   <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="iptPw" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="iptPw" name="iptPw">
                   </div>
                   <div class="d-flex align-items-center justify-content-between mb-4">
                     <!-- <div class="form-check">
@@ -65,7 +65,7 @@
                     </div> -->
                     <a class="text-primary fw-medium fs-3" href="#">Lupa Password?</a>
                   </div>
-                  <a href="../menu/dashboard/index.php" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Masuk</a>
+                  <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Masuk</button>
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-medium">Belum memiliki akun?</p>
                     <a class="text-primary fw-medium ms-2" href="../main/authentication-register.html">Buat akun</a>
