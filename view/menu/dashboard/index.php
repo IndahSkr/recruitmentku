@@ -3,6 +3,8 @@
 
 <head>
   <?php
+  session_start();
+  $upkey = $_SESSION['upkey'];
   include "../../sidemenu/components/head.php"
   ?>
   <title>Document</title>
