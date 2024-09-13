@@ -30,8 +30,42 @@
         $dtjson = json_encode($dt);
         $send = curlpost($url, $dtjson);
         $result = json_decode($send, TRUE);
-        // $hasil = $result['status'];
-        print_r($send);
+        $stat = $result['status'];
+        // $hasil = $result['hasil'];
+        // print_r($result);
+
+        if ($stat == "200") {
+            $hasil = $result['hasil'];
+            $_SESSION['upkey'] = $uname . "/" . $pw;
+    ?>
+            <script>
+                Swal.fire({
+                    title: 'Sukses',
+                    text: '<?php echo $result['pesan'] ?>',
+                    icon: 'success',
+                    timer: 1500,
+                    timerProgressBar: true
+                }).then(function() {
+                    window.location.href = '../../../view/menu/dashboard/'
+                })
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Gagal',
+                    text: '<?php echo $result['pesan'] ?>',
+                    text: 'Silahkan coba lagi',
+                    icon: 'error',
+                    timer: 1500,
+                    timerProgressBar: true
+                }).then(function() {
+                    window.location = '../../../view/auth/'
+                })
+            </script>
+    <?php
+        }
     }
     ?>
 </body>
