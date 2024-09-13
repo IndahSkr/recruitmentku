@@ -4,6 +4,7 @@ include "conn.php";
 $dtpos = json_decode(file_get_contents('php://input'), true);
 $code = $dtpos['code'];
 
+
 if ($code == "login") {
     $uname = $dtpos['uname'];
     $pass = $dtpos['pw'];
@@ -15,34 +16,34 @@ if ($code == "login") {
     $query->bind_result($pw, $nmlkp, $idlevel);
     $query->execute();
 
-    // $query->store_result();
-    // $result = $query->num_rows;
+    $query->store_result();
+    $result = $query->num_rows;
 
-    $data = array(
-        "hasil" => $query[1]
-    );
+    // $data = array(
+    //     "hasil" => $query
+    // );
 
-    // if ($result == 1) {
-    //     $dt = array();
-    //     while ($row = $query->fetch()) {
-    //         $dt = array(
-    //             "password" => $pw,
-    //             "nama" => $nmlkp,
-    //             "idlevel" => $idlevel
-    //         );
-    //     }
+    if ($result == 1) {
+        $dt = array();
+        while ($row = $query->fetch()) {
+            $dt = array(
+                "password" => $pw,
+                "nama" => $nmlkp,
+                "idlevel" => $idlevel
+            );
+        }
 
-    //     $data = array(
-    //         "status" => 200,
-    //         "pesan" => "Username Ditemukan",
-    //         "hasil" => $dt
-    //     );
-    // } else {
-    //     $data = array(
-    //         "status" => 204,
-    //         "pesan" => "Password atau Username Salah"
-    //     );
-    // }
+        $data = array(
+            "status" => 200,
+            "pesan" => "Username Ditemukan",
+            "hasil" => $dt
+        );
+    } else {
+        $data = array(
+            "status" => 204,
+            "pesan" => "Password atau Username Salah"
+        );
+    }
 } elseif ($code == "regist") {
     $nmlkp = $dtpos['nmlkp'];
     $uname = $dtpos['uname'];
