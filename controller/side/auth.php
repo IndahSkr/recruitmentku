@@ -51,10 +51,11 @@ if ($code == "login") {
     $email = $dtpos['email'];
     $wa = $dtpos['wa'];
     $idlevel = $dtpos['idlevel'];
+    $isActive = $dtpos['isActive'];
 
-    $sql = "INSERT INTO tbuser (iduser, nmlkp, uname, pw, email, wa, idlevel) VALUES (null, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO tbuser (iduser, nmlkp, uname, pw, email, wa, idlevel, isActive) VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
     $query = $conn->prepare($sql);
-    $query->bind_param("ssssss", $nmlkp, $uname, $pw, $email, $wa, $idlevel);
+    $query->bind_param("sssssss", $nmlkp, $uname, $pw, $email, $wa, $idlevel, $isActive);
 
     if ($query->execute()) {
         $data = array(

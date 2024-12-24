@@ -32,13 +32,15 @@
             "pw" => $pw,
             "email" => $email,
             "wa" => $wa,
-            "idlevel" => $idlevel
+            "idlevel" => $idlevel,
+            "isActive" => "1"
         );
 
         $dtjson = json_encode($dt);
         $send = curlpost($url, $dtjson);
         $result = json_decode($send, TRUE);
         $hasil = $result['status'];
+        // print_r($result);
 
         if ($hasil == 200) {
     ?>
@@ -71,14 +73,14 @@
         <?php
         }
         ?>
-        <!-- <script>
+        <script>
             Swal.fire({
                 title: 'Error!',
                 text: 'Do you want to continue',
                 icon: 'error',
                 confirmButtonText: 'Cool'
             })
-        </script> -->
+        </script>
     <?php
     }
     ?>
