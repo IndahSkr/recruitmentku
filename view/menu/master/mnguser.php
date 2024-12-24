@@ -34,8 +34,9 @@ $upkey = $_SESSION['upkey'];
 
       $jsonAdmin = json_encode($dtAdmin);
       $sendAdmin = curlpost($url1, $jsonAdmin);
-      $result = json_decode($sendAdmin, TRUE);
-      // print_r($dtAdmin);
+      $resultAdmin = json_decode($sendAdmin, TRUE);
+      $pesanAdmin = $resultAdmin['pesan'];
+
       ?>
       <!--  Header End -->
       <div class="container-fluid">
@@ -53,7 +54,7 @@ $upkey = $_SESSION['upkey'];
                   <thead class="text-dark fs-4">
                     <tr>
                       <th>
-                        <h6>Nama Lengkap<?php print_r($sendAdmin) ?></h6>
+                        <h6>Nama Lengkap</h6>
                       </th>
                       <th>
                         <h6>Email</h6>
@@ -65,21 +66,77 @@ $upkey = $_SESSION['upkey'];
                         <h6>Status</h6>
                       </th>
                       <th>
-                        <h6>Aksi</h6>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <div class="ms-3">
-                            <h6 class="fs-4 fw-semibold mb-0">Arif Hayati Indah Lestari</h6>
-                            <span class="fw-normal">username</span>
+
+                    <?php
+                    // print_r($resultAdmin);
+                    foreach ($pesanAdmin as $sAdmin) {
+                      // echo ($sAdmin['iduser']);
+                    ?>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                              <h6 class="fs-4 fw-semibold mb-0"><?php echo $sAdmin['nmlkp'] ?></h6>
+                              <span class="fw-normal"><?php echo $sAdmin['uname'] ?></span>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                    </tr>
+                        </td>
+                        <td>
+                          <p class="mb-0 fw-normal"><?php echo $sAdmin['email'] ?></p>
+                        </td>
+                        <td>
+                          <p class="mb-0 fw-normal"><?php echo $sAdmin['wa'] ?></p>
+                        </td>
+                        <td>
+                          <?php
+                          if ($sAdmin['isActive'] == 1) {
+                          ?>
+                            <span class="badge bg-success-subtle text-success fw-semibold fs-2 gap-1 d-inline-flex align-items-center">
+                              <i class="ti ti-circle fs-3"></i>active
+                            </span>
+                          <?php
+                          } else {
+                          ?>
+                            <span class="badge text-bg-danger text-dark fw-semibold fs-2 gap-1 d-inline-flex align-items-center">
+                              <i class="ti ti-x fs-3"></i>inactive
+                            </span>
+                          <?php
+                          }
+                          ?>
+                        </td>
+                        <td>
+                          <div class="dropdown dropstart">
+                            <a href="javascript:void(0)" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="ti ti-dots-vertical fs-6"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)">
+                                  <i class="fs-4 ti ti-plus"></i>Add
+                                </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)">
+                                  <i class="fs-4 ti ti-edit"></i>Edit
+                                </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" href="javascript:void(0)">
+                                  <i class="fs-4 ti ti-trash"></i>Delete
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+
                   </tbody>
                 </table>
               </div>

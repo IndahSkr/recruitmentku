@@ -31,21 +31,24 @@ if (password_verify($password, $dt['pw'])) {
 
         $sql1 = "SELECT iduser, nmlkp, uname, email, wa, idlevel, isActive FROM tbuser";
         $query = $conn->prepare($sql1);
-        $query->bind_result($id, $nmlkp, $uname, $uname, $wa, $idlevel, $isActive);
+        $query->bind_result($id, $nmlkp, $uname, $email, $wa, $idlevel, $isActive);
         $query->execute();
         $query->store_result();
         $result = $query->num_rows;
         if ($query->num_rows > 0) {
             $dt = array();
             while ($row2 = $query->fetch()) {
-                $dt = array(
-                    "iduser" => $id,
-                    "nmlkp" => $nmlkp,
-                    "uname" => $uname,
-                    "email" => $uname,
-                    "wa" => $wa,
-                    "idlevel" => $idlevel,
-                    "isActive" => $isActive
+                array_push(
+                    $dt,
+                    array(
+                        "iduser" => $id,
+                        "nmlkp" => $nmlkp,
+                        "uname" => $uname,
+                        "email" => $email,
+                        "wa" => $wa,
+                        "idlevel" => $idlevel,
+                        "isActive" => $isActive
+                    )
                 );
             }
 
