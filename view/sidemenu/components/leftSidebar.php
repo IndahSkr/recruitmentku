@@ -28,13 +28,47 @@
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">MASTER</span>
         </li>
-        <li class="sidebar-item">
+        <!-- <li class="sidebar-item">
           <a class="sidebar-link" href="../../menu/master/mnguser.php" aria-expanded="false">
             <span>
               <i class="ti ti-login"></i>
             </span>
             <span class="hide-menu">User Management</span>
           </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="../../menu/master/mngmenu.php" aria-expanded="false">
+            <span>
+              <i class="ti ti-tools-kitchen"></i>
+            </span>
+            <span class="hide-menu">Menu Management</span>
+          </a>
+        </li> -->
+        <li class="sidebar-item">
+          <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#collapseManagement">
+            <span class="d-flex">
+              <i class="ti ti-layout-grid"></i>
+            </span>
+            <span class="hide-menu">Management</span>
+          </a>
+          <ul aria-expanded="false" class="collapse first-level" id="collapseManagement">
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../../menu/master/mnguser.php">
+                <div class="round-16 d-flex align-items-center justify-content-center">
+                  <i class="ti ti-circle"></i>
+                </div>
+                <span class="hide-menu">User Management</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../../menu/master/mngmenu.php">
+                <div class="round-16 d-flex align-items-center justify-content-center">
+                  <i class="ti ti-circle"></i>
+                </div>
+                <span class="hide-menu">Menu Management</span>
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
