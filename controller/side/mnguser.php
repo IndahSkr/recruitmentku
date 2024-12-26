@@ -59,7 +59,7 @@ if (password_verify($password, $dt['pw'])) {
         } else {
             $data = array(
                 "status" => 200,
-                "pesan" => "Data tidak Ditemukan ",
+                "pesan" => "Tidak ada data",
             );
         }
     }

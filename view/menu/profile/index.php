@@ -13,8 +13,15 @@ $dtprofileid = array(
 $jsonprofileid = json_encode($dtprofileid);
 $sendprofileid = curlpost($url2, $jsonprofileid);
 $resultprofileid = json_decode($sendprofileid, TRUE);
-// $pesanAdmin = $resultprofileid['pesan'];
 
+$dtuserid = array(
+  "key" => $upkey,
+  "id" => $uid,
+  "code" => "userById"
+);
+$jsonuserid = json_encode($dtuserid);
+$senduserid = curlpost($url2, $jsonuserid);
+$resultuserid = json_decode($senduserid, TRUE);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +55,7 @@ $resultprofileid = json_decode($sendprofileid, TRUE);
           <div class="card-body px-4 py-3">
             <div class="row align-items-center">
               <div class="col-9">
-                <h4 class="fw-semibold mb-8">User Profile<?php print_r($sendprofileid); ?></h4>
+                <h4 class="fw-semibold mb-8">User Profile<?php print_r($resultuserid); ?></h4>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
