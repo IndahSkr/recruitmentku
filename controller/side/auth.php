@@ -9,11 +9,11 @@ if ($code == "login") {
     $uname = $dtpos['uname'];
     $pass = $dtpos['pw'];
 
-    $sql = "SELECT pw, nmlkp, idlevel FROM tbuser WHERE uname=?";
+    $sql = "SELECT pw, nmlkp, idlevel, iduser FROM tbuser WHERE uname=?";
 
     $query = $conn->prepare($sql);
     $query->bind_param("s", $uname);
-    $query->bind_result($pw, $nmlkp, $idlevel);
+    $query->bind_result($pw, $nmlkp, $idlevel, $iduser);
     $query->execute();
 
     $query->store_result();
@@ -29,7 +29,8 @@ if ($code == "login") {
             $dt = array(
                 "password" => $pw,
                 "nama" => $nmlkp,
-                "idlevel" => $idlevel
+                "idlevel" => $idlevel,
+                "iduser" => $iduser
             );
         }
 
