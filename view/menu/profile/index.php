@@ -1,3 +1,21 @@
+<?php
+session_start();
+include "../../../model/url/alamat.php";
+include "../../../assets/vendor/func/curl.php";
+$upkey = $_SESSION['upkey'];
+$uid = $_SESSION['id'];
+
+$dtprofileid = array(
+  "key" => $upkey,
+  "id" => $uid,
+  "code" => "profileById"
+);
+$jsonprofileid = json_encode($dtprofileid);
+$sendprofileid = curlpost($url2, $jsonprofileid);
+$resultprofileid = json_decode($sendprofileid, TRUE);
+// $pesanAdmin = $resultprofileid['pesan'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +34,6 @@
     ?>
     <!-- Sidebar Enb -->
 
-
-
     <!-- Main Wrapper -->
     <div class="body-wrapper">
       <!-- Header Start -->
@@ -32,7 +48,7 @@
           <div class="card-body px-4 py-3">
             <div class="row align-items-center">
               <div class="col-9">
-                <h4 class="fw-semibold mb-8">User Profile</h4>
+                <h4 class="fw-semibold mb-8">User Profile<?php print_r($sendprofileid); ?></h4>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -50,7 +66,7 @@
             <img src="../../../assets/images/backgrounds/profilebg.jpg" alt="background" class="img-fluid">
             <div class="row align-items-center">
               <div class="col-lg-4 order-lg-1 order-2">
-                <div class="d-flex align-items-center justify-content-around m-4">
+                <!-- <div class="d-flex align-items-center justify-content-around m-4">
                   <div class="text-center">
                     <i class="ti ti-file-description fs-6 d-block mb-2"></i>
                     <h4 class="mb-0 lh-1">938</h4>
@@ -66,7 +82,7 @@
                     <h4 class="mb-0 lh-1">2,659</h4>
                     <p class="mb-0 ">Following</p>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="col-lg-4 mt-n3 order-lg-2 order-1">
                 <div class="mt-n5">
@@ -85,7 +101,7 @@
               </div>
               <div class="col-lg-4 order-last">
                 <ul class="list-unstyled d-flex align-items-center justify-content-center justify-content-lg-end my-3 mx-4 pe-xxl-4 gap-3">
-                  <li>
+                  <!-- <li>
                     <a class="d-flex align-items-center justify-content-center btn btn-primary p-2 fs-4 rounded-circle" href="javascript:void(0)" width="30" height="30">
                       <i class="ti ti-brand-facebook"></i>
                     </a>
@@ -99,7 +115,7 @@
                     <a class="btn btn-danger d-flex align-items-center justify-content-center p-2 fs-4 rounded-circle" href="javascript:void(0)">
                       <i class="ti ti-brand-youtube"></i>
                     </a>
-                  </li>
+                  </li> -->
                   <li>
                     <button class="btn btn-primary text-nowrap">Add To Story</button>
                   </li>
@@ -143,33 +159,34 @@
                     <h4 class="card-title">Account Details</h4>
                     <form action="#">
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control border border-info" placeholder="Full Name">
+                        <input type="text" class="form-control border border-info" placeholder="Full Name" disabled>
                         <label for="#">
                           <i class="ti ti-user me-2 fs-4 text-info"></i>
                           <span class="border-start border-info ps-3">Full Name</span>
                         </label>
                       </div>
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control border border-info" placeholder="uname">
+                        <input type="text" class="form-control border border-info" placeholder="uname" disabled>
                         <label for="#">
                           <i class="ti ti-users me-2 fs-4 text-info"></i>
                           <span class="border-start border-info ps-3">uname</span>
                         </label>
                       </div>
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control border border-info" placeholder="E-Mail">
+                        <input type="text" class="form-control border border-info" placeholder="E-Mail" disabled>
                         <label for="#">
                           <i class="ti ti-mail me-2 fs-4 text-info"></i>
                           <span class="border-start border-info ps-3">E-Mail</span>
                         </label>
                       </div>
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control border border-info" placeholder="Whatsapp">
+                        <input type="text" class="form-control border border-info" placeholder="Whatsapp" disabled>
                         <label for="#">
                           <i class="ti ti-brand-whatsapp me-2 fs-4 text-info"></i>
                           <span class="border-start border-info ps-3">Whatsapp</span>
                         </label>
                       </div>
+                      <div></div>
                     </form>
                   </div>
                 </div>

@@ -37,6 +37,7 @@
         if ($stat == "200") {
             $hasil = $result['hasil'];
             $_SESSION['upkey'] = $uname . "/" . $pw;
+            $_SESSION['id'] = $hasil['iduser'];
     ?>
             <script>
                 Swal.fire({
