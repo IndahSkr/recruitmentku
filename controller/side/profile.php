@@ -58,25 +58,34 @@ if (password_verify($password, $dt['pw'])) {
             );
         }
     } elseif ($code == "userById") {
-        $iduser = $dtpos['id'];
+        $idusr = $dtpos['id'];
 
         $sql1 = "SELECT nmlkp, uname, email, wa, pw FROM tbuser WHERE iduser=?";
 
-        $query = $conn->prepare($sql1);
-        $query->bind_param("s", $iduser);
-        $query->bind_result($nmlkp, $uname, $email, $wa, $pw);
-        $query->execute();
+        $query1 = $conn->prepare($sql1);
+        $query1->bind_param("s", $idusr);
+        $query1->bind_result($nmlkp, $uname, $email, $wa, $pass);
+        $query1->execute();
 
-        $query->store_result();
-        $result = $query->num_rows;
+        $query1->store_result();
+        $result1 = $query1->num_rows;
 
-        if ($result == 1) {
+        if ($result1 == 1) {
+            $dt = array();
+            while ($row = $query1->fetch()) {
+                $dt = array(
+                    "nmlkp" => $nmlkp,
+                    "uname" => $uname,
+                    "email" => $email,
+                    "wa" => $wa,
+                    "pw" => $pass
+                );
+            }
+
             $data = array(
-                "nmlkp" => $nmlkp,
-                "uname" => $uname,
-                "email" => $email,
-                "wa" => $wa,
-                "pw" => $pw
+                "status" => 200,
+                "pesan" => "Sukses",
+                "hasil" => $dt
             );
         } else {
             $data = array(

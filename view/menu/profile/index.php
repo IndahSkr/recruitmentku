@@ -13,6 +13,7 @@ $dtprofileid = array(
 $jsonprofileid = json_encode($dtprofileid);
 $sendprofileid = curlpost($url2, $jsonprofileid);
 $resultprofileid = json_decode($sendprofileid, TRUE);
+$stsprofileid = $resultprofileid['status'];
 
 $dtuserid = array(
   "key" => $upkey,
@@ -22,6 +23,7 @@ $dtuserid = array(
 $jsonuserid = json_encode($dtuserid);
 $senduserid = curlpost($url2, $jsonuserid);
 $resultuserid = json_decode($senduserid, TRUE);
+$hsluserid = $resultuserid['hasil'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +57,7 @@ $resultuserid = json_decode($senduserid, TRUE);
           <div class="card-body px-4 py-3">
             <div class="row align-items-center">
               <div class="col-9">
-                <h4 class="fw-semibold mb-8">User Profile<?php print_r($resultuserid); ?></h4>
+                <h4 class="fw-semibold mb-8">User Profile<?php print_r($resultprofileid); ?></h4>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -101,8 +103,8 @@ $resultuserid = json_decode($senduserid, TRUE);
                     </div>
                   </div>
                   <div class="text-center">
-                    <h5 class="mb-0">Mathew Anderson</h5>
-                    <p class="mb-0">Designer</p>
+                    <h5 class="mb-0"><?php echo $hsluserid['nmlkp'] ?></h5>
+                    <!-- <p class="mb-0">Designer</p> -->
                   </div>
                 </div>
               </div>
@@ -166,28 +168,28 @@ $resultuserid = json_decode($senduserid, TRUE);
                     <h4 class="card-title">Account Details</h4>
                     <form action="#">
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control border border-info" placeholder="Full Name" disabled>
+                        <input type="text" class="form-control border border-info" placeholder="Full Name" value="<?php echo $hsluserid['nmlkp'] ?>" disabled>
                         <label for="#">
                           <i class="ti ti-user me-2 fs-4 text-info"></i>
                           <span class="border-start border-info ps-3">Full Name</span>
                         </label>
                       </div>
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control border border-info" placeholder="uname" disabled>
+                        <input type="text" class="form-control border border-info" placeholder="uname" value="<?php echo $hsluserid['uname'] ?>" disabled>
                         <label for="#">
                           <i class="ti ti-users me-2 fs-4 text-info"></i>
                           <span class="border-start border-info ps-3">uname</span>
                         </label>
                       </div>
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control border border-info" placeholder="E-Mail" disabled>
+                        <input type="text" class="form-control border border-info" placeholder="E-Mail" value="<?php echo $hsluserid['email'] ?>" disabled>
                         <label for="#">
                           <i class="ti ti-mail me-2 fs-4 text-info"></i>
                           <span class="border-start border-info ps-3">E-Mail</span>
                         </label>
                       </div>
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control border border-info" placeholder="Whatsapp" disabled>
+                        <input type="text" class="form-control border border-info" placeholder="Whatsapp" value="<?php echo $hsluserid['wa'] ?>" disabled>
                         <label for="#">
                           <i class="ti ti-brand-whatsapp me-2 fs-4 text-info"></i>
                           <span class="border-start border-info ps-3">Whatsapp</span>
