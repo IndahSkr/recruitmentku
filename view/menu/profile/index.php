@@ -15,6 +15,16 @@ $sendprofileid = curlpost($url2, $jsonprofileid);
 $resultprofileid = json_decode($sendprofileid, TRUE);
 $stsprofileid = $resultprofileid['status'];
 
+if ($stsprofileid == '204') {
+  ?>
+  <script>
+    window.location='./addprofile.php';
+  </script>
+  <?php
+} else {
+  echo "200"; 
+}
+
 $dtuserid = array(
   "key" => $upkey,
   "id" => $uid,
@@ -332,3 +342,6 @@ $hsluserid = $resultuserid['hasil'];
 </body>
 
 </html>
+<?php
+// }
+?>
