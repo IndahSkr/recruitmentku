@@ -171,31 +171,79 @@ $hasilProvince = $resultProvince['data'];
     </div>
   </div>
   <script>
+    // function provDist(i) {
+    //   $.ajax({
+    //     url: 'http://wilayah.id/api/provinces.json',
+    //     dataType: "jsonp",
+    //     success: function(data) {
+    //       console.log("betul")
+    //     }
+    //   })
+    // }
+  </script>
+  <script>
     function provDist(i) {
       $.ajax({
-        method: 'GET',
-        url: 'https://wilayah.id/api/regencies/12.json',
-        dataType: "json",
+        xhrFields: {
+          withCredentials: true
+        },
+        url: 'https://api.binderbyte.com/wilayah/provinsi?api_key=a9601dfd383abb3188eb8664b514710180a3a05f3f9ce03cbd3f03cc0b520737',
+        type: "GET",
+        dataType: "jsonp",
         crossDomain: true,
         headers: {
-          'Content-Type': 'text/xml; charset=utf-8',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, GET',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type'
+          "Content-Type": "utf-8",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
         },
-        success: function(hasil) {
-          // var hsl = hasil['data'];
-          // console.log(JSON.stringify(hasil));
-          console.log(hasil)
+        success: function(data) {
+          document.getElementById("display").innerHTML =
+            JSON.stringify(data);
         }
-      });
-      // $.ajax("https://wilayah.id/api/regencies/" + i + ".json ", {
-      //   success: function(d) {
-      //     console.log(d)
-      //   }
-      // })
+      })
     }
+    // function provDist(i) {
+    //   $.ajax({
+    //     url: 'https://wilayah.id/api/regencies/12.json',
+    //     // url: 'https://wilayah.id/api/provinces.json',
+    //     type: "GET",
+    //     dataType: "jsonp",
+    //     contentType: "application/json",
+    //     crossDomain: true,
+    //     // headers: {
+    //     //   "Access-Control-Allow-Origin": "*",
+    //     //   "Access-Control-Allow-Credentials": "true",
+    //     //   // "Access-Control-Max-Age": "1800",
+    //     //   "Access-Control-Allow-Headers": "content-type, Origin, Accept",
+    //     //   "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+    //     // },
+    //     success: function(d) {
+    //       let x = JSON.stringify(d);
+    //       console.log(x)
+    //     }
+    //     // method: 'GET',
+    //     // url: 'https://wilayah.id/api/regencies/12.json',
+    //     // dataType: "json",
+    //     // crossDomain: true,
+    //     // headers: {
+    //     //   'Content-Type': 'text/xml; charset=utf-8',
+    //     //   'Content-Type': 'application/json',
+    //     //   'Access-Control-Allow-Origin': '*',
+    //     //   'Access-Control-Allow-Methods': 'POST, GET',
+    //     //   'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type'
+    //     // },
+    //     // success: function(hasil) {
+    //     //   // var hsl = hasil['data'];
+    //     //   // console.log(JSON.stringify(hasil));
+    //     //   console.log(hasil)
+    //     // }
+    //   });
+    //   //   // $.ajax("https://wilayah.id/api/regencies/" + i + ".json ", {
+    //   //   //   success: function(d) {
+    //   //   //     console.log(d)
+    //   //   //   }
+    //   //   // })
+    // }
   </script>
 </body>
 
