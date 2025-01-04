@@ -184,22 +184,8 @@ $hasilProvince = $resultProvince['data'];
   <script>
     function provDist(i) {
       $.ajax({
-        xhrFields: {
-          withCredentials: true
-        },
-        url: 'https://api.binderbyte.com/wilayah/provinsi?api_key=a9601dfd383abb3188eb8664b514710180a3a05f3f9ce03cbd3f03cc0b520737',
-        type: "GET",
-        dataType: "jsonp",
-        crossDomain: true,
-        headers: {
-          "Content-Type": "utf-8",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": "true",
-        },
-        success: function(data) {
-          document.getElementById("display").innerHTML =
-            JSON.stringify(data);
-        }
+        url: "https://dev.farizdotid.com/api/daerahindonesia/provinsi",
+        
       })
     }
     // function provDist(i) {
