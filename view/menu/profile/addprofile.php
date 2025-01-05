@@ -108,7 +108,7 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">Province <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="select" required class="form-select form-control" onchange="provCity(value)">
+                  <select name="select" id="sprovince" required class="form-select form-control" onchange="provCity(value)">
                     <option value="0">Select Your Province</option>
                     <?php
                     foreach ($hasilProvince as $prov) {
@@ -124,8 +124,8 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">City <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selCity" required class="form-select form-control" onchange="cityDist(value)">
-                    <option value="">Select Your City</option>
+                  <select name="select" id="selCity" required class="form-select form-control" onchange="cityDist(value)" disabled>
+                    <option value="0">Select Your City</option>
                   </select>
                 </div>
               </div>
@@ -133,8 +133,8 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">District <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selDist" required class="form-select form-control" onchange="distVill(value)">
-                    <option value="">Select Your City</option>
+                  <select name="select" id="selDist" required class="form-select form-control" onchange="distVill(value)" disabled>
+                    <option value="0">Select Your City</option>
                   </select>
                 </div>
               </div>
@@ -142,8 +142,8 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">Village <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selVill" required class="form-select form-control">
-                    <option value="">Select Your City</option>
+                  <select name="select" id="selVill" required class="form-select form-control" disabled>
+                    <option value="0">Select Your City</option>
                   </select>
                 </div>
               </div>
@@ -171,11 +171,28 @@ $hasilProvince = $resultProvince['data'];
   </div>
   <script>
     function provCity(i) {
+      var idDist = document.getElementById("selCity");
+      var idCity = document.getElementById("selDist");
+      var idvill = document.getElementById("selVill");
+
+      if (idDist.value > 0) {
+        idDist.selectedIndex = 0;
+      } else {
+        idDist.disabled = false;
+      }
+
+      if (idCity.value > 0) {
+        idCity.selectedIndex = 0;
+      }
+
+      if (idvill.value > 0) {
+        idvill.selectedIndex = 0;
+      }
+
       $.ajax({
         url: "https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=" + i,
         method: "GET",
         success: function(d) {
-          var idDist = document.getElementById("selCity");
           var dt = JSON.stringify(d.kota_kabupaten);
           dt = JSON.parse(dt);
           // console.log(dt)
@@ -189,15 +206,28 @@ $hasilProvince = $resultProvince['data'];
           });
         }
       })
+
     }
 
     function cityDist(i) {
-      // alert(i)
+      var idCity = document.getElementById("selDist");
+      var idvill = document.getElementById("selVill");
+
+      if (idCity.value > 0) {
+        idCity.selectedIndex = 0;
+      } else {
+        idCity.disabled = false;
+      }
+
+      if (idvill.value > 0) {
+        idvill.selectedIndex = 0;
+      }
+
       $.ajax({
         url: "https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=" + i,
         method: "GET",
         success: function(d) {
-          var idCity = document.getElementById("selDist");
+
           // var dt = d.kecamatan;
           var dt = JSON.stringify(d.kecamatan);
           dt = JSON.parse(dt);
@@ -211,18 +241,28 @@ $hasilProvince = $resultProvince['data'];
           });
         }
       });
+
+
     }
 
     function distVill(i) {
+      var idvill = document.getElementById("selVill");
+
+      if (idvill.value > 0) {
+        idvill.selectedIndex = 0;
+      } else {
+        idvill.disabled = false;
+      }
+
       $.ajax({
         url: "https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=" + i,
         method: "GET",
         success: function(d) {
-          var idvill = document.getElementById("selVill");
+
           // var dt = d.kecamatan;
           var dt = JSON.stringify(d.kelurahan);
           dt = JSON.parse(dt);
-          console.log(dt);
+          // console.log(dt);
           dt.forEach(x => {
             var option = document.createElement("option");
             option.text = x.nama;
@@ -232,6 +272,8 @@ $hasilProvince = $resultProvince['data'];
           });
         }
       });
+
+
     }
   </script>
   <script>
