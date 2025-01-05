@@ -108,7 +108,7 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">Province <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="select" required class="form-select form-control" onchange="provDist(value)">
+                  <select name="select" id="select" required class="form-select form-control" onchange="provCity(value)">
                     <option value="0">Select Your Province</option>
                     <?php
                     foreach ($hasilProvince as $prov) {
@@ -121,16 +121,20 @@ $hasilProvince = $resultProvince['data'];
                 </div>
               </div>
               <div class="mb-3 form-group">
+                <label class="form-label">City <span class="text-danger">*</span>
+                </label>
+                <div class="controls">
+                  <select name="select" id="selCity" required class="form-select form-control" onchange="cityDist(value)">
+                    <option value="">Select Your City</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 form-group">
                 <label class="form-label">District <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="select" required class="form-select form-control">
+                  <select name="select" id="selDist" required class="form-select form-control" onchange="distVill(value)">
                     <option value="">Select Your City</option>
-                    <option value="1">India</option>
-                    <option value="2">USA</option>
-                    <option value="3">UK</option>
-                    <option value="4">Canada</option>
-                    <option value="5">Dubai</option>
                   </select>
                 </div>
               </div>
@@ -138,13 +142,8 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">Village <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="select" required class="form-select form-control">
+                  <select name="select" id="selVill" required class="form-select form-control">
                     <option value="">Select Your City</option>
-                    <option value="1">India</option>
-                    <option value="2">USA</option>
-                    <option value="3">UK</option>
-                    <option value="4">Canada</option>
-                    <option value="5">Dubai</option>
                   </select>
                 </div>
               </div>
@@ -171,65 +170,72 @@ $hasilProvince = $resultProvince['data'];
     </div>
   </div>
   <script>
-    // function provDist(i) {
-    //   $.ajax({
-    //     url: 'http://wilayah.id/api/provinces.json',
-    //     dataType: "jsonp",
-    //     success: function(data) {
-    //       console.log("betul")
-    //     }
-    //   })
-    // }
-  </script>
-  <script>
-    function provDist(i) {
+    function provCity(i) {
       $.ajax({
-        url: "https://dev.farizdotid.com/api/daerahindonesia/provinsi",
-        
+        url: "https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=" + i,
+        method: "GET",
+        success: function(d) {
+          var idDist = document.getElementById("selCity");
+          var dt = JSON.stringify(d.kota_kabupaten);
+          dt = JSON.parse(dt);
+          // console.log(dt)
+          dt.forEach(x => {
+            var option = document.createElement("option");
+            option.text = x.nama;
+            option.value = x.id;
+            idDist.appendChild(option);
+            // x.add(option);
+            // console.log(x.id);
+          });
+        }
       })
     }
-    // function provDist(i) {
-    //   $.ajax({
-    //     url: 'https://wilayah.id/api/regencies/12.json',
-    //     // url: 'https://wilayah.id/api/provinces.json',
-    //     type: "GET",
-    //     dataType: "jsonp",
-    //     contentType: "application/json",
-    //     crossDomain: true,
-    //     // headers: {
-    //     //   "Access-Control-Allow-Origin": "*",
-    //     //   "Access-Control-Allow-Credentials": "true",
-    //     //   // "Access-Control-Max-Age": "1800",
-    //     //   "Access-Control-Allow-Headers": "content-type, Origin, Accept",
-    //     //   "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-    //     // },
-    //     success: function(d) {
-    //       let x = JSON.stringify(d);
-    //       console.log(x)
-    //     }
-    //     // method: 'GET',
-    //     // url: 'https://wilayah.id/api/regencies/12.json',
-    //     // dataType: "json",
-    //     // crossDomain: true,
-    //     // headers: {
-    //     //   'Content-Type': 'text/xml; charset=utf-8',
-    //     //   'Content-Type': 'application/json',
-    //     //   'Access-Control-Allow-Origin': '*',
-    //     //   'Access-Control-Allow-Methods': 'POST, GET',
-    //     //   'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type'
-    //     // },
-    //     // success: function(hasil) {
-    //     //   // var hsl = hasil['data'];
-    //     //   // console.log(JSON.stringify(hasil));
-    //     //   console.log(hasil)
-    //     // }
-    //   });
-    //   //   // $.ajax("https://wilayah.id/api/regencies/" + i + ".json ", {
-    //   //   //   success: function(d) {
-    //   //   //     console.log(d)
-    //   //   //   }
-    //   //   // })
-    // }
+
+    function cityDist(i) {
+      // alert(i)
+      $.ajax({
+        url: "https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=" + i,
+        method: "GET",
+        success: function(d) {
+          var idCity = document.getElementById("selDist");
+          // var dt = d.kecamatan;
+          var dt = JSON.stringify(d.kecamatan);
+          dt = JSON.parse(dt);
+          // console.log(dt);
+          dt.forEach(x => {
+            var option = document.createElement("option");
+            option.text = x.nama;
+            option.value = x.id;
+            idCity.appendChild(option);
+            // console.log(x);
+          });
+        }
+      });
+    }
+
+    function distVill(i) {
+      $.ajax({
+        url: "https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=" + i,
+        method: "GET",
+        success: function(d) {
+          var idvill = document.getElementById("selVill");
+          // var dt = d.kecamatan;
+          var dt = JSON.stringify(d.kelurahan);
+          dt = JSON.parse(dt);
+          console.log(dt);
+          dt.forEach(x => {
+            var option = document.createElement("option");
+            option.text = x.nama;
+            option.value = x.id;
+            idvill.appendChild(option);
+            // console.log(x);
+          });
+        }
+      });
+    }
+  </script>
+  <script>
+
   </script>
 </body>
 
