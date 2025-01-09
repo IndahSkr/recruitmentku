@@ -175,18 +175,33 @@ $hasilProvince = $resultProvince['data'];
       var idCity = document.getElementById("selDist");
       var idvill = document.getElementById("selVill");
 
-      if (idDist.value > 0) {
+      var length = idDist.options.length;
+      var len = idCity.options.length;
+      var le = idvill.options.length;
+
+      if (length > 0) {
         idDist.selectedIndex = 0;
-      } else {
-        idDist.disabled = false;
+        for (let i = length - 1; i > 0; i--) {
+          idDist.remove(i);
+        }
+
       }
 
-      if (idCity.value > 0) {
+      if (len > 0) {
         idCity.selectedIndex = 0;
+
+        for (let i = len - 1; i > 0; i--) {
+          console.log(i);
+          idCity.remove(i)
+        }
       }
 
-      if (idvill.value > 0) {
+      if (le > 0) {
         idvill.selectedIndex = 0;
+
+        for (let i = le - 1; i > 0; i--) {
+          idvill.remove(i)
+        }
       }
 
       $.ajax({
@@ -205,7 +220,9 @@ $hasilProvince = $resultProvince['data'];
             // console.log(x.id);
           });
         }
-      })
+      });
+
+      idDist.disabled = false;
 
     }
 
@@ -213,14 +230,23 @@ $hasilProvince = $resultProvince['data'];
       var idCity = document.getElementById("selDist");
       var idvill = document.getElementById("selVill");
 
-      if (idCity.value > 0) {
+      var len = idCity.options.length;
+      var le = idvill.options.length;
+
+      if (len > 0) {
         idCity.selectedIndex = 0;
-      } else {
-        idCity.disabled = false;
+        for (let i = len - 1; i > 0; i--) {
+          console.log(i);
+          idCity.remove(i)
+        }
       }
 
       if (idvill.value > 0) {
         idvill.selectedIndex = 0;
+
+        for (let i = le - 1; i > 0; i--) {
+          idvill.remove(i)
+        }
       }
 
       $.ajax({
@@ -242,16 +268,19 @@ $hasilProvince = $resultProvince['data'];
         }
       });
 
-
+      idCity.disabled = false;
     }
 
     function distVill(i) {
       var idvill = document.getElementById("selVill");
+      var le = idvill.options.length;
 
       if (idvill.value > 0) {
         idvill.selectedIndex = 0;
-      } else {
-        idvill.disabled = false;
+
+        for (let i = le - 1; i > 0; i--) {
+          idvill.remove(i)
+        }
       }
 
       $.ajax({
@@ -273,6 +302,7 @@ $hasilProvince = $resultProvince['data'];
         }
       });
 
+      idvill.disabled = false;
 
     }
   </script>
