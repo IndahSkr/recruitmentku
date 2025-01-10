@@ -59,12 +59,12 @@ $hasilProvince = $resultProvince['data'];
         <!-- Body Content Start-->
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">User Profile Edited</h4>
-            <p class="card-subtitle mb-3">
+            <h4 class="card-title"><strong>User Profile Edited</strong></h4>
+            <!-- <p class="card-subtitle mb-3">
               made with bootstrap elements
-            </p>
-            <p><?php print_r($hasilProvince); ?></p>
-            <form action="#" class="floating-labels">
+            </p> -->
+
+            <form action="#" class="floating-labels" id="formProfile">
               <div class="mb-3 form-group">
                 <label class="form-label">Introduction <span class="text-danger">*</span>
                 </label>
@@ -78,15 +78,16 @@ $hasilProvince = $resultProvince['data'];
                   <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <input type="text" name="noChar" class="form-control" required data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters Allowed, Only Numbers" />
+                  <input type="text" name="ssnprofile" id="ssnprofile" class="form-control" required onkeyup="numberValidation()" />
                 </div>
+                <!-- <div class="valid-feedback">Looks good!</div> -->
               </div>
               <div class="mb-3">
                 <label class="form-label">Date of Birth
                   <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <input type="date" class="form-control" />
+                  <input type="date" class="form-control" required />
                 </div>
               </div>
               <div class="mb-3 form-group">
@@ -94,7 +95,7 @@ $hasilProvince = $resultProvince['data'];
                   <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <input type="text" name="" class="form-control" />
+                  <input type="text" name="" class="form-control" required />
                 </div>
               </div>
               <div class="mb-3 form-group">
@@ -108,7 +109,7 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">Province <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="sprovince" required class="form-select form-control" onchange="provCity(value)">
+                  <select name="select" id="sprovince" required class="form-select form-control" required onchange="provCity(value)">
                     <option value="0">Select Your Province</option>
                     <?php
                     foreach ($hasilProvince as $prov) {
@@ -124,7 +125,7 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">City <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selCity" required class="form-select form-control" onchange="cityDist(value)" disabled>
+                  <select name="select" id="selCity" required class="form-select form-control" onchange="cityDist(value)" required disabled>
                     <option value="0">Select Your City</option>
                   </select>
                 </div>
@@ -133,7 +134,7 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">District <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selDist" required class="form-select form-control" onchange="distVill(value)" disabled>
+                  <select name="select" id="selDist" required class="form-select form-control" onchange="distVill(value)" required disabled>
                     <option value="0">Select Your City</option>
                   </select>
                 </div>
@@ -142,9 +143,14 @@ $hasilProvince = $resultProvince['data'];
                 <label class="form-label">Village <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selVill" required class="form-select form-control" disabled>
+                  <select name="select" id="selVill" required class="form-select form-control" required disabled>
                     <option value="0">Select Your City</option>
                   </select>
+                </div>
+              </div>
+              <div class="mb-3 form-group row">
+                <div class="col-md-12 d-grid gap-2">
+                  <button type="submit" class="btn btn-outline-primary m-1">Submit</button>
                 </div>
               </div>
               <!-- <div class="form-floating mb-3">
@@ -307,7 +313,20 @@ $hasilProvince = $resultProvince['data'];
     }
   </script>
   <script>
-
+    function numberValidation() {
+      var x = document.forms['formProfile']['ssnprofile'].value;
+      var y = document.getElementById('ssnprofile');
+      if (/[^\d\.]/.test(x)) {
+        y.classList.remove('is-valid');
+        y.classList.remove('is-invalid');
+        y.classList.add('is-invalid');
+        false;
+      } else {
+        y.classList.remove('is-valid');
+        y.classList.remove('is-invalid');
+        y.classList.add('is-valid');
+      }
+    }
   </script>
 </body>
 
