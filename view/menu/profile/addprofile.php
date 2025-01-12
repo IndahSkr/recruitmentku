@@ -2,11 +2,22 @@
 session_start();
 include "../../../model/url/alamat.php";
 include "../../../assets/vendor/func/curl.php";
+$upkey = $_SESSION['upkey'];
+$uid = $_SESSION['id'];
 
 $link = 'https://wilayah.id/api/provinces.json';
 
 $resultProvince = json_decode(curlget($link), TRUE);
 $hasilProvince = $resultProvince['data'];
+
+$dtjnsform = array(
+  "key" => $upkey,
+  "code" => "jnsForm",
+);
+$jsonjnsform = json_encode($dtjnsform);
+$sendjnsform = curlpost($url2, $jsonjnsform);
+$resultjnsform = json_decode($sendjnsform, TRUE);
+$stsjnsform = $resultjnsform['status'];
 
 ?>
 <!DOCTYPE html>
@@ -60,9 +71,9 @@ $hasilProvince = $resultProvince['data'];
         <div class="card">
           <div class="card-body">
             <h4 class="card-title"><strong>User Profile Edited</strong></h4>
-            <!-- <p class="card-subtitle mb-3">
-              made with bootstrap elements
-            </p> -->
+            <p class="card-subtitle mb-3">
+              <?php print_r($resultjnsform) ?>
+            </p>
 
             <form action="#" class="floating-labels" id="formProfile">
               <div class="mb-3 form-group">
@@ -79,8 +90,10 @@ $hasilProvince = $resultProvince['data'];
                 </label>
                 <div class="controls">
                   <input type="text" name="ssnprofile" id="ssnprofile" class="form-control" required onkeyup="numberValidation()" />
+                  <div class="valid-feedback">Success!</div>
+                  <div class="invalid-feedback">Bukan angka, mohon ganti dengan angka!</div>
                 </div>
-                <!-- <div class="valid-feedback">Looks good!</div> -->
+
               </div>
               <div class="mb-3">
                 <label class="form-label">Date of Birth
@@ -96,6 +109,15 @@ $hasilProvince = $resultProvince['data'];
                 </label>
                 <div class="controls">
                   <input type="text" name="" class="form-control" required />
+                </div>
+              </div>
+              <div class="mb-3 form-group">
+                <label class="form-label">Jenis Formasi <span class="text-danger">*</span>
+                </label>
+                <div class="controls">
+                  <select name="select" id="selForm" required class="form-select form-control" required>
+                    <option value="0">Select Your City</option>
+                  </select>
                 </div>
               </div>
               <div class="mb-3 form-group">
@@ -153,6 +175,7 @@ $hasilProvince = $resultProvince['data'];
                   <button type="submit" class="btn btn-outline-primary m-1">Submit</button>
                 </div>
               </div>
+
               <!-- <div class="form-floating mb-3">
                 <textarea class="form-control" placeholder="Introduction" rows="50" cols="30" name="" id=""></textarea> -->
               <!-- <input type="text" class="form-control" placeholder="Username" /> -->

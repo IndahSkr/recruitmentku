@@ -93,6 +93,33 @@ if (password_verify($password, $dt['pw'])) {
                 "pesan" => "Tidak ada data"
             );
         }
+    } elseif ($code == "jnsForm") {
+        $sql = "SELECT idjnsform, jnsform FROM tbjnsform";
+        $query = $conn->prepare($sql);
+        $query->bind_result($id, $name);
+        $query->execute();
+        $query->store_result();
+        if ($query->num_rows > 0) {
+            $dt = array();
+            while ($row = $query->fetch()) {
+                array_push(
+                    $dt,
+                    array(
+                        "id" => $id,
+                        "name" => $name
+                    )
+                );
+            }
+            $data = array(
+                "status" => 200,
+                "pesan" => $dt
+            );
+        } else {
+            $data = array(
+                "status" => 200,
+                "pesan" => "Tidak ada data",
+            );
+        }
     }
 } else {
     $data = array(
