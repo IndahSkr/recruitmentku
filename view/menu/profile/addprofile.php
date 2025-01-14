@@ -18,6 +18,7 @@ $jsonjnsform = json_encode($dtjnsform);
 $sendjnsform = curlpost($url2, $jsonjnsform);
 $resultjnsform = json_decode($sendjnsform, TRUE);
 $stsjnsform = $resultjnsform['status'];
+$pesanjnsform = $resultjnsform['pesan'];
 
 ?>
 <!DOCTYPE html>
@@ -75,12 +76,12 @@ $stsjnsform = $resultjnsform['status'];
               <?php print_r($resultjnsform) ?>
             </p>
 
-            <form action="#" class="floating-labels" id="formProfile">
+            <form action="../../../model/bridge/profile/addprofile.php?word=tmbprofile" method="post" class="floating-labels" id="formProfile">
               <div class="mb-3 form-group">
                 <label class="form-label">Introduction <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <textarea name="textarea" id="textarea" rows="5" cols="30" class="form-control" required placeholder="Textarea text"></textarea>
+                  <textarea name="tintro" id="tintro" rows="5" cols="30" class="form-control" required placeholder="Textarea text"></textarea>
                 </div>
               </div>
               <hr>
@@ -116,7 +117,14 @@ $stsjnsform = $resultjnsform['status'];
                 </label>
                 <div class="controls">
                   <select name="select" id="selForm" required class="form-select form-control" required>
-                    <option value="0">Select Your City</option>
+                    <option value="0">Select Your Formation</option>
+                    <?php
+                    foreach ($pesanjnsform as $jnsform) {
+                    ?>
+                      <option value="<?php echo $jnsform['id'] ?>"><?php echo $jnsform['name'] ?></option>
+                    <?php
+                    }
+                    ?>
                   </select>
                 </div>
               </div>
@@ -157,7 +165,7 @@ $stsjnsform = $resultjnsform['status'];
                 </label>
                 <div class="controls">
                   <select name="select" id="selDist" required class="form-select form-control" onchange="distVill(value)" required disabled>
-                    <option value="0">Select Your City</option>
+                    <option value="0">Select Your District</option>
                   </select>
                 </div>
               </div>
@@ -166,7 +174,7 @@ $stsjnsform = $resultjnsform['status'];
                 </label>
                 <div class="controls">
                   <select name="select" id="selVill" required class="form-select form-control" required disabled>
-                    <option value="0">Select Your City</option>
+                    <option value="0">Select Your Village</option>
                   </select>
                 </div>
               </div>

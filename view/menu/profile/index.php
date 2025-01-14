@@ -14,15 +14,16 @@ $jsonprofileid = json_encode($dtprofileid);
 $sendprofileid = curlpost($url2, $jsonprofileid);
 $resultprofileid = json_decode($sendprofileid, TRUE);
 $stsprofileid = $resultprofileid['status'];
+// print_r($stsprofileid);
 
 if ($stsprofileid == '204') {
-  ?>
+?>
   <script>
-    window.location='./addprofile.php';
+    window.location = './addprofile.php';
   </script>
-  <?php
+<?php
 } else {
-  echo "200"; 
+  echo "200";
 }
 
 $dtuserid = array(
@@ -67,7 +68,7 @@ $hsluserid = $resultuserid['hasil'];
           <div class="card-body px-4 py-3">
             <div class="row align-items-center">
               <div class="col-9">
-                <h4 class="fw-semibold mb-8">User Profile<?php print_r($resultprofileid); ?></h4>
+                <h4 class="fw-semibold mb-8">User Profile<?php print_r($sendprofileid); ?></h4>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">

@@ -26,12 +26,12 @@ if (password_verify($password, $dt['pw'])) {
 
     if ($code == "profileById") {
         $iduser = $dtpos['id'];
-        
-        $sql1 = "SELECT idprofile, ssn, dtbirth, birthplc, address, idvillage, iddistrict, idprovince, intro, idjnsform, idlegalitas, photo FROM tbprofile WHERE iduser=?";
+
+        $sql1 = "SELECT idprofile, ssn, dtbirth, birthplc, address, idvillage, iddistrict, idprovince, intro, idjnsform, photo FROM tbprofile WHERE iduser=?";
         
         $query = $conn->prepare($sql1);
         $query->bind_param("s", $iduser);
-        $query->bind_result($idprofile, $ssn, $dtbirth, $birthplc, $address, $idvillage, $iddistrict, $idprovince, $intro, $idjnsform, $idlegalitas, $photo);
+        $query->bind_result($idprofile, $ssn, $dtbirth, $birthplc, $address, $idvillage, $iddistrict, $idprovince, $intro, $idjnsform, $photo);
         $query->execute();
         $query->store_result();
         $result = $query->num_rows;
