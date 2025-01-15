@@ -19,9 +19,29 @@
 
   if ($word == "tmbProfile") {
     $intro = $_POST['tintro'];
+    $ssn = $_POST['ssnprofile'];
+    $dtbirth = $_POST['dtbirth'];
+    $birthplc = $_POST['birthplc'];
+    $formation = $_POST['selForm'];
+    $address = $_POST['addr'];
+    $prov = $_POST['sprovince'];
+    $city = $_POST['selCity'];
+    $dist = $_POST['selDist'];
+    $village = $_POST['selVill'];
+
     echo $intro;
+    echo $ssn;
+    echo $dtbirth;
+    echo $birthplc;
+    echo $formation;
+    echo $address;
+    echo $prov;
+    echo $city;
+    echo $dist;
+    echo $village;
   }
   ?>
+  <!-- <h1>hello</h1> -->
 </body>
 
 </html>

@@ -5,10 +5,10 @@ include "../../../assets/vendor/func/curl.php";
 $upkey = $_SESSION['upkey'];
 $uid = $_SESSION['id'];
 
-$link = 'https://wilayah.id/api/provinces.json';
+$link = 'https://alamat.thecloudalert.com/api/provinsi/get/';
 
 $resultProvince = json_decode(curlget($link), TRUE);
-$hasilProvince = $resultProvince['data'];
+$hasilProvince = $resultProvince['result'];
 
 $dtjnsform = array(
   "key" => $upkey,
@@ -73,15 +73,17 @@ $pesanjnsform = $resultjnsform['pesan'];
           <div class="card-body">
             <h4 class="card-title"><strong>User Profile Edited</strong></h4>
             <p class="card-subtitle mb-3">
-              <?php print_r($resultjnsform) ?>
+              <?php
+              // print_r($resultjnsform) 
+              ?>
             </p>
 
-            <form action="../../../model/bridge/profile/addprofile.php?word=tmbprofile" method="post" class="floating-labels" id="formProfile">
+            <form action="../../../model/bridge/profile/addprofile.php?word=tmbProfile" method="POST" class="floating-labels" id="formProfile">
               <div class="mb-3 form-group">
                 <label class="form-label">Introduction <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <textarea name="tintro" id="tintro" rows="5" cols="30" class="form-control" required placeholder="Textarea text"></textarea>
+                  <textarea name="tintro" id="tintro" rows="5" cols="30" class="form-control" placeholder="Textarea text" required></textarea>
                 </div>
               </div>
               <hr>
@@ -90,7 +92,7 @@ $pesanjnsform = $resultjnsform['pesan'];
                   <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <input type="text" name="ssnprofile" id="ssnprofile" class="form-control" required onkeyup="numberValidation()" />
+                  <input type="text" name="ssnprofile" id="ssnprofile" class="form-control" onkeyup="numberValidation()" required />
                   <div class="valid-feedback">Success!</div>
                   <div class="invalid-feedback">Bukan angka, mohon ganti dengan angka!</div>
                 </div>
@@ -101,7 +103,7 @@ $pesanjnsform = $resultjnsform['pesan'];
                   <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <input type="date" class="form-control" required />
+                  <input type="date" name="dtbirth" class="form-control" required />
                 </div>
               </div>
               <div class="mb-3 form-group">
@@ -109,14 +111,14 @@ $pesanjnsform = $resultjnsform['pesan'];
                   <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <input type="text" name="" class="form-control" required />
+                  <input type="text" name="birthplc" class="form-control" required />
                 </div>
               </div>
               <div class="mb-3 form-group">
                 <label class="form-label">Jenis Formasi <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selForm" required class="form-select form-control" required>
+                  <select name="selForm" id="selForm" class="form-select form-control" required>
                     <option value="0">Select Your Formation</option>
                     <?php
                     foreach ($pesanjnsform as $jnsform) {
@@ -132,19 +134,19 @@ $pesanjnsform = $resultjnsform['pesan'];
                 <label class="form-label">Address <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <textarea name="textarea" id="textarea" rows="5" cols="30" class="form-control" required placeholder="Textarea text"></textarea>
+                  <textarea name="addr" id="addr" rows="5" cols="30" class="form-control" placeholder="Textarea text" required></textarea>
                 </div>
               </div>
               <div class="mb-3 form-group">
                 <label class="form-label">Province <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="sprovince" required class="form-select form-control" required onchange="provCity(value)">
+                  <select name="sprovince" id="sprovince" required class="form-select form-control" onchange="provCity(value)" required>
                     <option value="0">Select Your Province</option>
                     <?php
                     foreach ($hasilProvince as $prov) {
                     ?>
-                      <option value="<?php echo $prov['code'] ?>"><?php echo $prov['name'] ?></option>
+                      <option value="<?php echo $prov['id'] ?>"><?php echo $prov['text'] ?></option>
                     <?php
                     }
                     ?>
@@ -155,7 +157,7 @@ $pesanjnsform = $resultjnsform['pesan'];
                 <label class="form-label">City <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selCity" required class="form-select form-control" onchange="cityDist(value)" required disabled>
+                  <select name="selCity" id="selCity" required class="form-select form-control" onchange="cityDist(value)" required disabled>
                     <option value="0">Select Your City</option>
                   </select>
                 </div>
@@ -164,7 +166,7 @@ $pesanjnsform = $resultjnsform['pesan'];
                 <label class="form-label">District <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selDist" required class="form-select form-control" onchange="distVill(value)" required disabled>
+                  <select name="selDist" id="selDist" required class="form-select form-control" onchange="distVill(value)" required disabled>
                     <option value="0">Select Your District</option>
                   </select>
                 </div>
@@ -173,7 +175,7 @@ $pesanjnsform = $resultjnsform['pesan'];
                 <label class="form-label">Village <span class="text-danger">*</span>
                 </label>
                 <div class="controls">
-                  <select name="select" id="selVill" required class="form-select form-control" required disabled>
+                  <select name="selVill" id="selVill" required class="form-select form-control" required disabled>
                     <option value="0">Select Your Village</option>
                   </select>
                 </div>
@@ -242,15 +244,16 @@ $pesanjnsform = $resultjnsform['pesan'];
       }
 
       $.ajax({
-        url: "https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=" + i,
+        // url: "https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=" + i,
+        url: "https://alamat.thecloudalert.com/api/kabkota/get/?d_provinsi_id=" + i,
         method: "GET",
         success: function(d) {
-          var dt = JSON.stringify(d.kota_kabupaten);
+          var dt = JSON.stringify(d.result);
           dt = JSON.parse(dt);
           // console.log(dt)
           dt.forEach(x => {
             var option = document.createElement("option");
-            option.text = x.nama;
+            option.text = x.text;
             option.value = x.id;
             idDist.appendChild(option);
             // x.add(option);
@@ -287,17 +290,17 @@ $pesanjnsform = $resultjnsform['pesan'];
       }
 
       $.ajax({
-        url: "https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=" + i,
+        url: "https://alamat.thecloudalert.com/api/kecamatan/get/?d_kabkota_id=" + i,
         method: "GET",
         success: function(d) {
 
           // var dt = d.kecamatan;
-          var dt = JSON.stringify(d.kecamatan);
+          var dt = JSON.stringify(d.result);
           dt = JSON.parse(dt);
-          // console.log(dt);
+          console.log(i);
           dt.forEach(x => {
             var option = document.createElement("option");
-            option.text = x.nama;
+            option.text = x.text;
             option.value = x.id;
             idCity.appendChild(option);
             // console.log(x);
@@ -321,17 +324,17 @@ $pesanjnsform = $resultjnsform['pesan'];
       }
 
       $.ajax({
-        url: "https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=" + i,
+        url: "https://alamat.thecloudalert.com/api/kelurahan/get/?d_kecamatan_id=" + i,
         method: "GET",
         success: function(d) {
 
           // var dt = d.kecamatan;
-          var dt = JSON.stringify(d.kelurahan);
+          var dt = JSON.stringify(d.result);
           dt = JSON.parse(dt);
           // console.log(dt);
           dt.forEach(x => {
             var option = document.createElement("option");
-            option.text = x.nama;
+            option.text = x.text;
             option.value = x.id;
             idvill.appendChild(option);
             // console.log(x);
