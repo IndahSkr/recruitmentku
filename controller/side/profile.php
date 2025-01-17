@@ -27,30 +27,39 @@ if (password_verify($password, $dt['pw'])) {
     if ($code == "profileById") {
         $iduser = $dtpos['id'];
 
-        $sql1 = "SELECT idprofile, ssn, dtbirth, birthplc, address, idvillage, iddistrict, idprovince, intro, idjnsform, photo FROM tbprofile WHERE iduser=?";
+        $sql1 = "SELECT idprofile, ssn, dtbirth, birthplc, detailAddress, idvillage, iddistrict, idprovince, intro, idjnsform, photo FROM tbprofile WHERE iduser=?";
         
         $query = $conn->prepare($sql1);
         $query->bind_param("s", $iduser);
-        $query->bind_result($idprofile, $ssn, $dtbirth, $birthplc, $address, $idvillage, $iddistrict, $idprovince, $intro, $idjnsform, $photo);
+        $query->bind_result($idprofile, $ssn, $dtbirth, $birthplc, $detailAddress, $idvillage, $iddistrict, $idprovince, $intro, $idjnsform, $photo);
         $query->execute();
         $query->store_result();
         $result = $query->num_rows;
 
         if ($result == 1) {
+            $dt = array();
+            while ($row = $query->fetch()) {
+                $dt = array(
+                    "idprofile" => $idprofile,
+                    "ssn" => $ssn,
+                    "dtbirth" => $dtbirth,
+                    "birthplc" => $birthplc,
+                    "address" => $detailAddress,
+                    "idvillage" => $idvillage,
+                    "iddistrict" => $iddistrict,
+                    "idprovince" => $idprovince,
+                    "intro" => $intro,
+                    "idjnsform" => $idjnsform,
+                    "photo" => $photo
+                );
+            }
+
             $data = array(
-                "idprofile" => $idprofile,
-                "ssn" => $ssn,
-                "dtbirth" => $dtbirth,
-                "birthplc" => $birthplc,
-                "address" => $address,
-                "idvillage" => $idvillage,
-                "iddistrict" => $iddistrict,
-                "idprovince" => $idprovince,
-                "intro" => $intro,
-                "idjnsform" => $idjnsform,
-                "idlegalitas" => $idlegalitas,
-                "photo" => $photo
+                "status" => 200,
+                "pesan" => "Sukses",
+                "hasil" => $dt
             );
+            
         } else {
             $data = array(
                 "status" => 204,
@@ -120,6 +129,36 @@ if (password_verify($password, $dt['pw'])) {
                 "pesan" => "Tidak ada data",
             );
         }
+    } elseif ($code == "insProfile") {
+        $iduser = $dtpos['iduser'];
+        $ssn = $dtpos['ssn'];
+        $dtbirth = $dtpos['dtbirth'];
+        $birthplc = $dtpos['birthplc'];
+        $address = $dtpos['address'];
+        $idvillage = $dtpos['idvillage'];
+        $iddistrict = $dtpos['iddistrict'];
+        $idprovince = $dtpos['idprovince'];
+        $intro = $dtpos['intro'];
+        $idjnsform = $dtpos['idjnsform'];
+
+        $sql = "INSERT INTO tbprofile(idprofile, iduser, ssn, dtbirth, birthplc, detailAddress, idvillage, iddistrict, idprovince, intro, idjnsform) 
+                VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $query = $conn->prepare($sql);
+        $query->bind_param("ssssssssss", $iduser, $ssn, $dtbirth, $birthplc, $address, $idvillage, $iddistrict, $idprovince, $intro, $idjnsform);
+        if ($query->execute()) {
+            $data = array(
+                "status" => 200,
+                "pesan" => "Sukses",
+            );
+        } else {
+            $data = array(
+                "status" => 403,
+                "pesan" => "Forbidden"
+            );
+        }
+        
+
     }
 } else {
     $data = array(

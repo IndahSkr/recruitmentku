@@ -14,6 +14,7 @@ $jsonprofileid = json_encode($dtprofileid);
 $sendprofileid = curlpost($url2, $jsonprofileid);
 $resultprofileid = json_decode($sendprofileid, TRUE);
 $stsprofileid = $resultprofileid['status'];
+$hslProfileId = $resultprofileid['hasil'];
 // print_r($stsprofileid);
 
 if ($stsprofileid == '204') {
@@ -68,7 +69,7 @@ $hsluserid = $resultuserid['hasil'];
           <div class="card-body px-4 py-3">
             <div class="row align-items-center">
               <div class="col-9">
-                <h4 class="fw-semibold mb-8">User Profile<?php print_r($sendprofileid); ?></h4>
+                <h4 class="fw-semibold mb-8">User Profile<?php print_r($hslProfileId); ?></h4>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -115,7 +116,7 @@ $hsluserid = $resultuserid['hasil'];
                   </div>
                   <div class="text-center">
                     <h5 class="mb-0"><?php echo $hsluserid['nmlkp'] ?></h5>
-                    <!-- <p class="mb-0">Designer</p> -->
+                    <p class="mb-0"> - </p>
                   </div>
                 </div>
               </div>
@@ -224,7 +225,7 @@ $hsluserid = $resultuserid['hasil'];
                           <div class="form-group row">
                             <!-- <label class="form-label text-end col-md-3">First Name:</label> -->
                             <div class="col-md-12">
-                              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, voluptatibus? Tenetur molestias quibusdam eligendi delectus dicta iusto natus similique, odit nesciunt dolorum quae illum quia sit voluptatem consequatur mollitia deserunt.</p>
+                              <p><?php echo $hslProfileId['intro'] ?></p>
                             </div>
                           </div>
                         </div>
@@ -243,7 +244,7 @@ $hsluserid = $resultuserid['hasil'];
                           <div class="form-group row">
                             <label class="form-label text-end col-md-3">SSN</label>
                             <div class="col-md-9">
-                              <p>332813xxxxxx</p>
+                              <p><?php echo $hslProfileId['ssn'] ?></p>
                             </div>
                           </div>
                         </div>
@@ -252,7 +253,7 @@ $hsluserid = $resultuserid['hasil'];
                           <div class="form-group row">
                             <label class="form-label text-end col-md-3">Birth Place</label>
                             <div class="col-md-9">
-                              <p>Buston</p>
+                              <p><?php echo $hslProfileId['birthplc'] ?></p>
                             </div>
                           </div>
                         </div>
@@ -261,7 +262,7 @@ $hsluserid = $resultuserid['hasil'];
                           <div class="form-group row">
                             <label class="form-label text-end col-md-3">Birth Date</label>
                             <div class="col-md-9">
-                              <p>19102002</p>
+                              <p><?php echo $hslProfileId['dtbirth'] ?></p>
                             </div>
                           </div>
                         </div>
@@ -290,7 +291,7 @@ $hsluserid = $resultuserid['hasil'];
                           <div class="form-group row">
                             <label class="form-label text-end col-md-3">Address</label>
                             <div class="col-md-9">
-                              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus, temporibus.</p>
+                              <p><?php echo $hslProfileId['address'] ?></p>
                             </div>
                           </div>
                         </div>

@@ -12,6 +12,8 @@
   <?php
   // echo $_POST['iptNmlkp'];
   session_start();
+  $upkey = $_SESSION['upkey'];
+  $uid = $_SESSION['id'];
   include "../../url/alamat.php";
   include "../../../assets/vendor/func/curl.php";
 
@@ -29,16 +31,56 @@
     $dist = $_POST['selDist'];
     $village = $_POST['selVill'];
 
-    echo $intro;
-    echo $ssn;
-    echo $dtbirth;
-    echo $birthplc;
-    echo $formation;
-    echo $address;
-    echo $prov;
-    echo $city;
-    echo $dist;
-    echo $village;
+    $dt = array(
+      "code" => "insProfile",
+      "key" => $upkey,
+      "iduser" => $uid,
+      "ssn" => $ssn,
+      "dtbirth" => $dtbirth,
+      "birthplc" => $birthplc,
+      "address" => $address,
+      "idvillage" => $village,
+      "iddistrict" => $dist,
+      "idprovince" => $prov,
+      "intro" => $intro,
+      "idjnsform" => $formation,
+    );
+
+    $dtjson = json_encode($dt);
+    $send = curlpost($url2, $dtjson);
+    $result = json_decode($send, TRUE);
+    $hasil = $result['status'];
+
+    if ($hasil == 200) {
+  ?>
+      <script>
+        Swal.fire({
+          title: 'Sukses',
+          text: 'Data Berhasil Disimpan',
+          icon: 'success',
+          timer: 1500,
+          timerProgressBar: true
+        }).then(function() {
+          window.location.href = '../../../view/menu/profile/'
+        })
+      </script>
+    <?php
+    } else {
+    ?>
+      <script>
+        Swal.fire({
+          title: 'Gagal',
+          text: 'Data Gagal Disimpan',
+          text: 'Silahkan coba lagi',
+          icon: 'error',
+          timer: 1500,
+          timerProgressBar: true
+        }).then(function() {
+          window.location = '../../../view/menu/profile/'
+        })
+      </script>
+  <?php
+    }
   }
   ?>
   <!-- <h1>hello</h1> -->
