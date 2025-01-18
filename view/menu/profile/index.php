@@ -215,7 +215,12 @@ $hsluserid = $resultuserid['hasil'];
               <div class="col-lg-8">
                 <div class="card shadow-none border">
                   <div class="card-body">
-                    <h5 class="card-title mb-0">Introductions</h5>
+                    <div class="d-flex justify-content-between">
+                      <h5 class="card-title mb-0">Introductions</h5>
+                      <button type="button" class="justify-content-center btn mb-1 btn-ronded btn-outline-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalEditIntro" onclick="openEditIntro('<?php echo $hslProfileId['intro'] ?>')">
+                        <i class="ti ti-edit fs-4"></i>
+                      </button>
+                    </div>
                   </div>
                   <hr class="m-0">
                   <div class="card-body">
@@ -234,7 +239,13 @@ $hsluserid = $resultuserid['hasil'];
                   </div>
                   <hr class="m-0">
                   <div class="card-body">
-                    <h5 class="card-title mb-0">User Details</h5>
+                    <div class="d-flex justify-content-between">
+                      <h4 class="card-title mb-0">User Details</h4>
+                      <button type="button" class="justify-content-center btn mb-1 btn-ronded btn-outline-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalEditDetail" onclick="openEditDetail('<?php echo $hslProfileId['intro'] ?>')">
+                        <i class="ti ti-edit fs-4"></i>
+                      </button>
+                    </div>
+
                   </div>
                   <hr class="m-0">
                   <div class="card-body">
@@ -335,12 +346,17 @@ $hsluserid = $resultuserid['hasil'];
 
       <!-- Footer Start -->
       <?php
-      include "../../sidemenu/modal/md-mnguser.php";
+      include "../../sidemenu/modal/mdprofile.php";
       include "../../sidemenu/components/footer.php";
       ?>
       <!-- Footer End -->
     </div>
   </div>
+  <script>
+    function openEditIntro(text) {
+      document.getElementById('edIntro').value = text;
+    }
+  </script>
 </body>
 
 </html>
