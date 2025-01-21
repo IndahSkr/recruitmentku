@@ -157,8 +157,32 @@ if (password_verify($password, $dt['pw'])) {
                 "pesan" => "Forbidden"
             );
         }
-        
+    } elseif ($code == "updIntro") {
+        $id = $dtpos['id'];
+        $intro = $dtpos['intro'];
 
+        $sql = "UPDATE tbprofile SET intro=? where iduser=?";
+
+        $query = $conn->prepare($sql);
+        $query->bind_param("ss", $intro, $id);
+        $query->execute();
+        // $query->store_result();
+        // $data = array(
+        //     "status" => 200,
+        //     "pesan" => $query->num_rows(),
+        // );
+
+        if ($query->execute()) {
+            $data = array(
+                "status" => 200,
+                "pesan" => "Sukses",
+            );
+        } else {
+            $data = array(
+                "status" => 403,
+                "pesan" => "Forbidden"
+            );
+        }
     }
 } else {
     $data = array(

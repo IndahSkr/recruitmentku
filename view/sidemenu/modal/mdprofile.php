@@ -5,18 +5,21 @@
         <h4 class="modal-title">Edit Introduction</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <form action="">
+      <form action="../../../model/bridge/profile/addprofile.php?word=updIntro" method="POST">
+        <div class="modal-body">
+
           <div class="mb-3">
             <label>Introduction</label>
+            <input type="text" name="idIntro" id="idIntro" hidden>
             <textarea name="edIntro" id="edIntro" class="form-control" rows="5" cols="30"></textarea>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary">Save changes</button>
-      </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline-primary">Save changes</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

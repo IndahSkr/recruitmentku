@@ -79,6 +79,52 @@
           window.location = '../../../view/menu/profile/'
         })
       </script>
+    <?php
+    }
+  } elseif ($word == "updIntro") {
+    $intro = $_POST['edIntro'];
+    $id = $_POST['idIntro'];
+
+    $dt = array(
+      "code" => "updIntro",
+      "key" => $upkey,
+      "id" => $id,
+      "intro" => $intro
+    );
+
+    $dtjson = json_encode($dt);
+    $send = curlpost($url2, $dtjson);
+    $result = json_decode($send, TRUE);
+    $hasil = $result['status'];
+
+    if ($hasil == 200) {
+    ?>
+      <script>
+        Swal.fire({
+          title: 'Sukses',
+          text: 'Data Berhasil Disimpan',
+          icon: 'success',
+          timer: 1500,
+          timerProgressBar: true
+        }).then(function() {
+          window.location.href = '../../../view/menu/profile/'
+        })
+      </script>
+    <?php
+    } else {
+    ?>
+      <script>
+        Swal.fire({
+          title: 'Gagal',
+          text: 'Data Gagal Disimpan',
+          text: 'Silahkan coba lagi',
+          icon: 'error',
+          timer: 1500,
+          timerProgressBar: true
+        }).then(function() {
+          window.location = '../../../view/menu/profile/'
+        })
+      </script>
   <?php
     }
   }
