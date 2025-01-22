@@ -24,9 +24,7 @@ if ($stsprofileid == '204') {
   </script>
 <?php
 } else {
-
-
-
+  // Select User by Id
   $dtuserid = array(
     "key" => $upkey,
     "id" => $uid,
@@ -36,6 +34,29 @@ if ($stsprofileid == '204') {
   $senduserid = curlpost($url2, $jsonuserid);
   $resultuserid = json_decode($senduserid, TRUE);
   $hsluserid = $resultuserid['hasil'];
+
+  // Select Formation
+  $dtjnsform = array(
+    "key" => $upkey,
+    "code" => "jnsForm",
+  );
+  $jsonjnsform = json_encode($dtjnsform);
+  $sendjnsform = curlpost($url2, $jsonjnsform);
+  $resultjnsform = json_decode($sendjnsform, TRUE);
+  $stsjnsform = $resultjnsform['status'];
+  $pesanjnsform = $resultjnsform['pesan'];
+
+  // Formation by Id
+  $dtform = array(
+    "key" => $upkey,
+    "code" => "jnsformId",
+    "id" => $hslProfileId['idjnsform']
+  );
+  $jsonform = json_encode($dtform);
+  $sendform = curlpost($url2, $jsonform);
+  $resultform = json_decode($sendform, TRUE);
+  $hslform = $resultform['hasil'];
+
 ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -241,7 +262,7 @@ if ($stsprofileid == '204') {
                     <div class="card-body">
                       <div class="d-flex justify-content-between">
                         <h4 class="card-title mb-0">User Details</h4>
-                        <button type="button" class="justify-content-center btn mb-1 btn-ronded btn-outline-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalEditDetail" onclick="openEditDetail('<?php echo $hslProfileId['intro'] ?>')">
+                        <button type="button" class="justify-content-center btn mb-1 btn-ronded btn-outline-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalEditDetail" onclick="openEditDetail('<?php echo $uid ?>','<?php echo $hslProfileId['ssn'] ?>', '<?php echo $hslProfileId['birthplc'] ?>', '<?php echo $hslProfileId['dtbirth'] ?>', '<?php echo $hslProfileId['idjnsform'] ?>')">
                           <i class="ti ti-edit fs-4"></i>
                         </button>
                       </div>
@@ -249,46 +270,45 @@ if ($stsprofileid == '204') {
                     </div>
                     <hr class="m-0">
                     <div class="card-body">
-                      <form action="#">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group row">
-                              <label class="form-label text-end col-md-3">SSN</label>
-                              <div class="col-md-9">
-                                <p><?php echo $hslProfileId['ssn'] ?></p>
-                              </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <label class="form-label text-end col-md-3">SSN</label>
+                            <div class="col-md-9">
+                              <p><?php echo $hslProfileId['ssn'] ?></p>
                             </div>
                           </div>
-
-                          <div class="col-md-12">
-                            <div class="form-group row">
-                              <label class="form-label text-end col-md-3">Birth Place</label>
-                              <div class="col-md-9">
-                                <p><?php echo $hslProfileId['birthplc'] ?></p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-12">
-                            <div class="form-group row">
-                              <label class="form-label text-end col-md-3">Birth Date</label>
-                              <div class="col-md-9">
-                                <p><?php echo $hslProfileId['dtbirth'] ?></p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-12">
-                            <div class="form-group row">
-                              <label class="form-label text-end col-md-3">Jenis Formasi</label>
-                              <div class="col-md-9">
-                                <p>Non Medis</p>
-                              </div>
-                            </div>
-                          </div>
-
                         </div>
-                      </form>
+
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <label class="form-label text-end col-md-3">Birth Place</label>
+                            <div class="col-md-9">
+                              <p><?php echo $hslProfileId['birthplc'] ?></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <label class="form-label text-end col-md-3">Birth Date</label>
+                            <div class="col-md-9">
+                              <p><?php echo $hslProfileId['dtbirth'] ?></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <label class="form-label text-end col-md-3">Jenis Formasi</label>
+                            <div class="col-md-9">
+
+                              <p><?php echo ($hslform['name']) ?></p>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
                     <hr class="m-0">
                     <div class="card-body">
@@ -359,6 +379,14 @@ if ($stsprofileid == '204') {
       function openEditIntro(id, text) {
         document.getElementById('edIntro').value = text;
         document.getElementById('idIntro').value = id;
+      }
+
+      function openEditDetail(id, ssn, plc, dte, form) {
+        document.getElementById('detId').value = id;
+        document.getElementById('detssn').value = ssn;
+        document.getElementById('detplc').value = plc;
+        document.getElementById('detdat').value = dte;
+        document.getElementById('detform').selectedIndex = form;
       }
     </script>
   </body>
