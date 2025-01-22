@@ -166,11 +166,62 @@ if (password_verify($password, $dt['pw'])) {
         $query = $conn->prepare($sql);
         $query->bind_param("ss", $intro, $id);
         $query->execute();
-        // $query->store_result();
-        // $data = array(
-        //     "status" => 200,
-        //     "pesan" => $query->num_rows(),
-        // );
+
+        if ($query->execute()) {
+            $data = array(
+                "status" => 200,
+                "pesan" => "Sukses",
+            );
+        } else {
+            $data = array(
+                "status" => 403,
+                "pesan" => "Forbidden"
+            );
+        }
+    } elseif ($code == "jnsformId") {
+        $id = $dtpos['id'];
+
+        $sql = "SELECT jnsform FROM tbjnsform where idjnsform=?";
+        $query = $conn->prepare($sql);
+        $query->bind_param("s", $id);
+        $query->bind_result($jnsform);
+        $query->execute();
+        $query->store_result();
+
+        if ($query->num_rows == 1) {
+            $dt = array();
+            while ($row = $query->fetch()) {
+                // array_push($dt, array(
+                //     "name" => $jnsform
+                // ));
+                $dt = array(
+                    "name" => $jnsform
+                );
+            }
+
+            $data = array(
+                "status" => 200,
+                "pesan" => "Sukses",
+                "hasil" => $dt
+            );
+        } else {
+            $data = array(
+                "status" => 204,
+                "pesan" => "Tidak ada data"
+            );
+        }
+    } elseif ($code == "updDetails") {
+        $id = $dtpos['id'];
+        $ssn = $dtpos['ssn'];
+        $plc = $dtpos['plc'];
+        $dte = $dtpos['dte'];
+        $idform = $dtpos['idform'];
+
+        $sql = "UPDATE tbprofile set ssn=?, dtbirth=?, birthplc=?, idjnsform=? where iduser=?";
+
+        $query = $conn->prepare($sql);
+        $query->bind_param("sssss", $ssn, $dte, $plc, $idform, $id);
+        $query->execute();
 
         if ($query->execute()) {
             $data = array(
