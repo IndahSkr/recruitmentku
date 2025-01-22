@@ -31,15 +31,44 @@
         <h4 class="modal-title">Edit User Details</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <form action="">
+      <form action="">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>SSN</label>
+            <input type="text" id="detId" name="detId">
+            <input type="text" id="detssn" name="detssn" class="form-control">
+          </div>
 
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary">Save changes</button>
-      </div>
+          <div class="mb-3">
+            <label>Birth Place</label>
+            <input type="text" id="detplc" name="detplc" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label> Date of Birth</label>
+            <input type="date" id="detdat" name="detdat" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Formation</label>
+            <select name="detform" id="detform" class="form-select m-1">
+              <option value="0">-- Select Formation Option --</option>
+              <?php
+              foreach ($pesanjnsform as $dtform) {
+              ?>
+                <option value="<?php echo $dtform['id'] ?>"><?php echo $dtform['name'] ?></option>
+              <?php
+              }
+              ?>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline-primary">Save changes</button>
+        </div>
+      </form>
+
     </div>
   </div>
 </div>
