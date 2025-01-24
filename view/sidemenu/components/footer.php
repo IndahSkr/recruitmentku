@@ -2,6 +2,6 @@
 <script src="../../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src=".../../../assets/js/sidebarmenu.js"></script>
 <script src="../../../assets/js/app.min.js"></script>
-<script src="../../../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-<script src="../../../assets/libs/simplebar/dist/simplebar.js"></script>
+<script src="../../../assets/vendor/apexcharts/dist/apexcharts.js"></script>
+<script src="../../../assets/vendor/simplebar/dist/simplebar.js"></script>
 <script src="../../../assets/js/dashboard.js"></script>
