@@ -26,6 +26,10 @@
       ?>
       <!--  Header End -->
       <div class="container-fluid">
+        <?php
+        $t = time();
+        echo ($t)
+        ?>
         <!--  Row 1 -->
         <div class="row">
           <div class="col-lg-8 d-flex align-items-strech">
